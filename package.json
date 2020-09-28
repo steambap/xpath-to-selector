@@ -1,0 +1,31 @@
+{
+  "name": "xpath-to-selector",
+  "version": "1.0.0",
+  "description": "convert xpath to css selector",
+  "main": "lib/main.js",
+  "repository": "https://github.com/steambap/xpath-to-selector.git",
+  "author": "Weilin Shi <934587911@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "package": "ncc build --source-map"
+  },
+  "keywords": [
+    "xpath"
+  ],
+  "files": [
+    "dist/*.js"
+  ],
+  "devDependencies": {
+    "@vercel/ncc": "^0.24.0",
+    "jest": "^26.4.0",
+    "jest-circus": "^26.4.0",
+    "ts-jest": "^26.2.0",
+    "typescript": "^4.0.2"
+  },
+  "bugs": {
+    "url": "https://github.com/steambap/kowloonia-parser/issues"
+  },
+  "homepage": "https://github.com/steambap/xpath-to-selector"
+}
