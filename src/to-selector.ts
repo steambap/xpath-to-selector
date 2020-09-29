@@ -45,11 +45,15 @@ function containsToStr(node: ASTNode) {
     throw new Error("Expect contains function to have 2 arguments");
   }
 
-  if (node.arg[0].name !== "text") {
-    throw new Error("Only text function is supported inside contains");
+  if (node.arg[0].name === "text") {
+    return ":contains(" + node.arg[1].name + ")";
   }
 
-  return ":contains(" + node.arg[1].name + ")";
+  if (node.arg[0].type === "attribute") {
+    return `[${node.arg[0].attr}*=${node.arg[1].name}]`;
+  }
+
+  throw new Error("Unsupported function: " + node.arg[0].type);
 }
 
 function predicateToStr(node: ASTNode) {
