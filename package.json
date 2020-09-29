@@ -15,8 +15,12 @@
     "xpath"
   ],
   "files": [
-    "dist/*.js"
+    "dist/*.js",
+    "dist/*.js.map",
+    "lib/*.js",
+    "lib/*.d.ts"
   ],
+  "typings": "lib/main.d.ts",
   "devDependencies": {
     "@vercel/ncc": "^0.24.0",
     "jest": "^26.4.0",
@@ -25,7 +29,7 @@
     "typescript": "^4.0.2"
   },
   "bugs": {
-    "url": "https://github.com/steambap/kowloonia-parser/issues"
+    "url": "https://github.com/steambap/xpath-to-selector/issues"
   },
   "homepage": "https://github.com/steambap/xpath-to-selector"
 }

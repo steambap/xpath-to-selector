@@ -6,7 +6,8 @@
 		"module": "commonjs",
 		"rootDir": "./src",
 		"outDir": "./lib",
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"declaration": true
 	},
 	"exclude": ["node_modules", "**/*.test.ts"]
 }
