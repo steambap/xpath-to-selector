@@ -8,3 +8,33 @@ test("it works", () => {
     "div#foo:nth-child(2) > span.bar a[class*=baz] img:nth-child(1)"
   );
 });
+
+test("attribute axis", () => {
+  const xPath = '//people/person[@lastname="brown"]';
+  const css = toCss(xPath);
+  expect(css).toEqual('people > person[lastname="brown"]');
+});
+
+test("position filter", () => {
+  const xPath = "/people/person[2]";
+  const css = toCss(xPath);
+  expect(css).toEqual("people > person:nth-child(2)");
+});
+
+test("contains filter", () => {
+  const xPath = "/people/person//address[contains(@street, 'south')]";
+  const css = toCss(xPath);
+  expect(css).toEqual("people > person address[street*=south]");
+});
+
+test("id", () => {
+  const xPath = '//people/person[@id="jed"]';
+  const css = toCss(xPath);
+  expect(css).toEqual("people > person#jed");
+});
+
+test("class", () => {
+  const xPath = '//people/person[@class="jung"]';
+  const css = toCss(xPath);
+  expect(css).toEqual("people > person.jung");
+});
