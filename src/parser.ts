@@ -327,10 +327,6 @@ class Parser {
     };
   }
 
-  /**
-   * @param {AstNode} node
-   * @param {object} type
-   */
   finishNode(node: ASTNode, type: string) {
     node.type = type;
     node.end = this.lastTokEnd;
@@ -468,7 +464,7 @@ class Parser {
   expect(type: TokenType) {
     return (
       this.eat(type) ||
-      this.raise(this.lastTokEnd, 'Expect a "' + type.label + '" after')
+      this.raise(this.lastTokEnd, `Expect a "${type.label}" after`)
     );
   }
 

@@ -107,3 +107,4 @@ dist
 __tests__/runner/*
 lib/**/*
 dist/
+.idea

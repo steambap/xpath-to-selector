@@ -1,6 +1,6 @@
 {
   "name": "xpath-to-selector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "convert xpath to css selector",
   "main": "lib/main.js",
   "repository": "https://github.com/steambap/xpath-to-selector.git",
@@ -12,7 +12,11 @@
     "package": "ncc build --source-map"
   },
   "keywords": [
-    "xpath"
+    "xpath",
+    "css-selector",
+    "xpath to css",
+    "xpath2css",
+    "convert"
   ],
   "files": [
     "dist/*.js",

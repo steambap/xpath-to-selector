@@ -28,17 +28,17 @@ function attrFilterToStr(node: ASTNode) {
   const attr = node.attr;
 
   if (attr === "id") {
-    return "#" + node.value;
+    return `#${node.value}`;
   } else if (attr === "class") {
-    return "." + node.value;
+    return `.${node.value}`;
   } else {
-    return "[" + attr + '="' + node.value + '"]';
+    return `[${attr}="${node.value}"]`;
   }
 }
 
 function containsToStr(node: ASTNode) {
   if (node.name !== "contains" || !node.arg) {
-    throw new Error("Unsupported function: " + node.name);
+    throw new Error(`Unsupported function: ${node.name}`);
   }
 
   if (node.arg.length !== 2) {
@@ -46,26 +46,26 @@ function containsToStr(node: ASTNode) {
   }
 
   if (node.arg[0].name === "text") {
-    return ":contains(" + node.arg[1].name + ")";
+    return `:contains(${node.arg[1].name})`;
   }
 
   if (node.arg[0].type === "attribute") {
     return `[${node.arg[0].attr}*=${node.arg[1].name}]`;
   }
 
-  throw new Error("Unsupported function: " + node.arg[0].type);
+  throw new Error(`Unsupported function: ${node.arg[0].type}`);
 }
 
 function predicateToStr(node: ASTNode) {
   switch (node.type) {
     case "positionFilter":
-      return ":nth-child(" + node.position + ")";
+      return `:nth-child(${node.position})`;
     case "attributeFilter":
       return attrFilterToStr(node);
     case "function":
       return containsToStr(node);
     case "name":
-      return ":has(" + node.name + ")";
+      return `:has(${node.name})`;
 
     default:
       throw new Error("!Unhandled predicate");
