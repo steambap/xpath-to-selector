@@ -38,3 +38,16 @@ test("class", () => {
   const css = toCss(xPath);
   expect(css).toEqual("people > person.jung");
 });
+
+test("multi filter", () => {
+  const xPath = '/html/body/form/input[@id="id_username" and position()=2]';
+  const css = toCss(xPath);
+  expect(css).toEqual("html > body > form > input#id_username:nth-child(2)");
+});
+
+test("invalid multi filter", () => {
+  expect(() => {
+    const xPath = "/input[666 and position()=6]";
+    toCss(xPath);
+  }).toThrow();
+});

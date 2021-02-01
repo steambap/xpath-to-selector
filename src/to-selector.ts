@@ -36,9 +36,24 @@ function attrFilterToStr(node: ASTNode) {
   }
 }
 
+function xpathFuncToStr(node: ASTNode) {
+  switch (node.name) {
+    case "contains":
+      return containsToStr(node);
+    case "position":
+      return positionToStr(node);
+    default:
+      throw new Error(`Unsupported function: ${node.name}`);
+  }
+}
+
+function positionToStr(node: ASTNode) {
+  return `:nth-child(${node.position})`;
+}
+
 function containsToStr(node: ASTNode) {
-  if (node.name !== "contains" || !node.arg) {
-    throw new Error(`Unsupported function: ${node.name}`);
+  if (!node.arg) {
+    throw new Error(`No arguments for function: ${node.name}`);
   }
 
   if (node.arg.length !== 2) {
@@ -63,7 +78,7 @@ function predicateToStr(node: ASTNode) {
     case "attributeFilter":
       return attrFilterToStr(node);
     case "function":
-      return containsToStr(node);
+      return xpathFuncToStr(node);
     case "name":
       return `:has(${node.name})`;
 

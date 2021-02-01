@@ -1,4 +1,4 @@
-import tt, { TokenType } from "./tokentype";
+import tt, { TokenType, keywords } from "./tokentype";
 import { isIdentifierChar, isIdentifierStart } from "./identifier";
 import { ASTNode } from "./definition";
 
@@ -315,6 +315,9 @@ class Parser {
 
   readWord() {
     const word = this.readWord1();
+    if (keywords[word]) {
+      return this.finishToken(keywords[word], word);
+    }
 
     return this.finishToken(tt.name, word);
   }
@@ -407,6 +410,10 @@ class Parser {
     while (this.eat(tt.bracketL)) {
       const filter = this.parsePredicate();
       filters.push(filter);
+      if (filter.type !== "positionFilter" && this.eat(tt.and)) {
+        const filter2 = this.parsePredicate();
+        filters.push(filter2);
+      }
       this.expect(tt.bracketR);
     }
 
@@ -464,7 +471,10 @@ class Parser {
   expect(type: TokenType) {
     return (
       this.eat(type) ||
-      this.raise(this.lastTokEnd, `Expect a "${type.label}" after`)
+      this.raise(
+        this.lastTokEnd,
+        `Expect a "${type.label}" after, got ${this.type.label}`
+      )
     );
   }
 
@@ -531,6 +541,24 @@ class Parser {
 
   parseMaybeFun(node: ASTNode) {
     node.name = this.getName();
+    // position function have its arguments like this
+    // position() = 2
+    if (node.name === "position") {
+      this.expect(tt.parenL);
+      this.expect(tt.parenR);
+      this.expect(tt.eq);
+      const type = this.type;
+      if (type !== tt.num) {
+        this.raise(
+          this.start,
+          `Expect a number for position function, got ${this.type.label}.`
+        );
+      }
+      node.position = this.value;
+      this.next();
+      return this.finishNode(node, "function");
+    }
+    // normal functions(arg1, arg2...)
     if (this.type === tt.parenL) {
       return this.parseFunction(node);
     }
