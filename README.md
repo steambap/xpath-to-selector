@@ -19,5 +19,15 @@ In my one of my previous job I was working on a product that is similar to Cypre
 
 The community already have [xpath-to-css](https://github.com/svenheden/xpath-to-css). But I think it would be nice to let others see my implementation if they don't like the Python and regexp based parser for xpath.
 
+By using a recursive parser, it allows you to parser something that is very difficult to match in Regex, for example:
+```JavaScript
+import xPath2Selector from "xpath-to-selector";
+
+const xPath =
+  '/html/body/form/input[@id="id_username" and position()=2]';
+const css = xPath2Selector(xPath);
+console.log(css); // => 'html > body > form > input#id_username:nth-child(2)'
+```
+
 ## license
 [MIT](LICENSE)
