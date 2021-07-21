@@ -1,4 +1,6 @@
 # xpath-to-selector
+[![CI](https://github.com/steambap/xpath-to-selector/actions/workflows/main.yaml/badge.svg)](https://github.com/steambap/xpath-to-selector/actions/workflows/main.yaml)
+
 convert xpath to css selector
 
 ## install
