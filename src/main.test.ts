@@ -51,3 +51,9 @@ test("invalid multi filter", () => {
     toCss(xPath);
   }).toThrow();
 });
+
+test("dash", () => {
+  const xPath = '//app-root[@id="foo"][2]/span[@class="bar"]//a[contains(@class, "baz")]//img[1]';
+  const css = toCss(xPath);
+  expect(css).toEqual('app-root#foo:nth-child(2) > span.bar a[class*=baz] img:nth-child(1)');
+})

@@ -26,6 +26,7 @@
   ],
   "typings": "lib/main.d.ts",
   "devDependencies": {
+    "@types/jest": "^27.0.2",
     "@vercel/ncc": "^0.24.0",
     "jest": "^26.4.0",
     "jest-circus": "^26.4.0",
