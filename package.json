@@ -1,6 +1,6 @@
 {
   "name": "xpath-to-selector",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "convert xpath to css selector",
   "main": "lib/main.js",
   "repository": "https://github.com/steambap/xpath-to-selector.git",
