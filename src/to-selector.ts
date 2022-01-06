@@ -88,8 +88,8 @@ function predicateToStr(node: ASTNode) {
 }
 
 function stepToSel(step: ASTNode, index: number) {
-  const axis = axisToStr(step.axis as TokenType, index === 0);
-  const nodeTest = nodeTestToStr(step.nodeTest as ASTNode);
+  const axis = axisToStr(step.axis!, index === 0);
+  const nodeTest = nodeTestToStr(step.nodeTest!);
   const predicate = (step.predicate || []).map(predicateToStr);
 
   return axis + nodeTest + predicate.join("");
