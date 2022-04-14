@@ -185,7 +185,7 @@ class Parser {
   readInt(radix: number, len = null) {
     const start = this.pos;
     let total = 0;
-    let e: number = (len === null ? Infinity : len) as number;
+    let e: number = len === null ? Infinity : len!;
     for (let i = 0; i < e; ++i) {
       const code = this.fullCharCodeAtPos();
       let val;
