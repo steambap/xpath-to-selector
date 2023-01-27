@@ -20,6 +20,9 @@ function nodeTestToStr(node: ASTNode): string {
   if (node.value === "*") {
     return "";
   }
+  if (node.value === "@") {
+    return attrFilterToStr(node.predicate![0]);
+  }
 
   return node.value || "";
 }
@@ -32,6 +35,9 @@ function attrFilterToStr(node: ASTNode) {
   } else if (attr === "class") {
     return `.${node.value}`;
   } else {
+    if (!node.value) {
+      return `[${attr}]`;
+    }
     return `[${attr}="${node.value}"]`;
   }
 }

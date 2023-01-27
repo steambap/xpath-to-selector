@@ -15,6 +15,12 @@ test("attribute axis", () => {
   expect(css).toEqual('people > person[lastname="brown"]');
 });
 
+test("attribute node test", () => {
+  const xPath = '//meta[@property="og:novel:author"]/@content';
+  const css = toCss(xPath);
+  expect(css).toEqual('meta[property="og:novel:author"] > [content]');
+});
+
 test("position filter", () => {
   const xPath = "/people/person[2]";
   const css = toCss(xPath);
@@ -56,4 +62,4 @@ test("dash", () => {
   const xPath = '//app-root[@id="foo"][2]/span[@class="bar"]//a[contains(@class, "baz")]//img[1]';
   const css = toCss(xPath);
   expect(css).toEqual('app-root#foo:nth-child(2) > span.bar a[class*=baz] img:nth-child(1)');
-})
+});

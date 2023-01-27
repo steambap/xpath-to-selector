@@ -388,6 +388,13 @@ class Parser {
       return this.finishNode(node, "nodeTest");
     } else if (type === tt.name) {
       return this.parseTag(node);
+    } else if (type === tt.at) {
+      node.value = "@";
+      const childNode = this.startNode();
+      node.predicate = [childNode];
+      this.parseAttrFilter(childNode);
+
+      return this.finishNode(node, "nodeTest");
     } else {
       this.raise(this.start, "Expect a node test");
     }
@@ -444,8 +451,9 @@ class Parser {
     this.next();
     // @attr
     node.attr = this.getName();
-    this.expect(tt.eq);
-    node.value = this.getString();
+    if (this.eat(tt.eq)) {
+      node.value = this.getString();
+    }
 
     return this.finishNode(node, "attributeFilter");
   }
