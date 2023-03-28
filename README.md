@@ -4,7 +4,7 @@
 convert xpath to css selector
 
 ## install
-> npm install --save-dev css-to-selector
+> npm install --save-dev xpath-to-selector
 
 ## usage
 ```JavaScript
